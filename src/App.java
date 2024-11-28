@@ -1,36 +1,34 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileWriter;
 
 public class App {
 
 
     private final static Color[] COLORS = {
-
-        new Color(0x0E1111), //0 grey
+        new Color(0x121213), //0 grey
         new Color(0xD924A5), //1 pink
         new Color(0x0ECAD1)  //2 blue
-
     };
 
     private final static Font defaultFont = new Font("OCR A Extended", Font.PLAIN, 16);
     private final static Font menuFont = new Font("OCR A Extended", Font.PLAIN, 16);
 
+    private static JFrame frame = createFrame();
+    private static JEditorPane editorPane = createEditorPane(frame);
+
     public static void main(String[] args) throws Exception {
 
-        JFrame frame = createFrame();
-        frame.setUndecorated(true);
+        SwingUtilities.invokeLater(() -> {
 
-        JMenuBar menuBar = createMenuBar();
-        frame.setJMenuBar(menuBar);
+            try {
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        JEditorPane editorPane = createEditorPane(frame);
-
-        JRootPane rootPane = frame.getRootPane();
-        rootPane.setBorder(BorderFactory.createMatteBorder(2,2,2,2, COLORS[1]));
-
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        });
 
     }
 
@@ -39,6 +37,15 @@ public class App {
         JFrame frame = new JFrame("TEXT EDITOR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 600);
+        frame.setUndecorated(true);
+
+        JMenuBar menuBar = createMenuBar();
+        frame.setJMenuBar(menuBar);
+
+        JRootPane rootPane = frame.getRootPane();
+        rootPane.setBorder(BorderFactory.createMatteBorder(2,2,2,2, COLORS[1]));
+
+        frame.setLocationRelativeTo(null);
 
         return frame;
 
@@ -55,6 +62,7 @@ public class App {
 
         JScrollPane scrollPane = new JScrollPane(editorPane);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setBackground(COLORS[0]);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -95,6 +103,46 @@ public class App {
         JMenuItem saveItem = createMenuItem("Save");
         JMenuItem exitItem = createMenuItem("Exit");
 
+        newItem.addActionListener(l -> {
+
+            editorPane.setText("");
+
+        });
+
+        saveItem.addActionListener(l -> {
+        
+            JFileChooser fileChooser = new JFileChooser();
+            int option = fileChooser.showSaveDialog(frame);
+
+            if (option == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                FileWriter fileWriter = null;
+
+                try {
+                    fileWriter = new FileWriter(file);
+                    fileWriter.write(editorPane.getText());
+                    JOptionPane.showMessageDialog(null, "File saved.");
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error saving file.");
+                } finally {
+                    try { 
+                        fileWriter.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Save cancelled.");
+            }
+
+        });
+
+        exitItem.addActionListener(l -> {
+
+            System.exit(0);
+
+        });
+
         fileMenu.add(newItem);
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
@@ -104,4 +152,5 @@ public class App {
         return menuBar;
 
     }
+
 }
