@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -114,6 +116,7 @@ public class App {
         openItem.addActionListener(l -> {
 
             JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Text Documents (*.txt)", "txt"));
             int option = fileChooser.showOpenDialog(frame);
 
             if (option == JFileChooser.APPROVE_OPTION) {
@@ -133,6 +136,7 @@ public class App {
         saveItem.addActionListener(l -> {
         
             JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Text Documents (*.txt)", "txt"));
             int option = fileChooser.showSaveDialog(frame);
 
             if (option == JFileChooser.APPROVE_OPTION) {
