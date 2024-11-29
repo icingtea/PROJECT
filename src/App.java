@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
 
 public class App {
 
@@ -100,12 +101,32 @@ public class App {
         fileMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 0, 2, 1, COLORS[2]));
 
         JMenuItem newItem = createMenuItem("New");
+        JMenuItem openItem = createMenuItem("Open");
         JMenuItem saveItem = createMenuItem("Save");
         JMenuItem exitItem = createMenuItem("Exit");
 
         newItem.addActionListener(l -> {
 
             editorPane.setText("");
+
+        });
+
+        openItem.addActionListener(l -> {
+
+            JFileChooser fileChooser = new JFileChooser();
+            int option = fileChooser.showOpenDialog(frame);
+
+            if (option == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                try {
+                    String fileContent = Files.readString(file.toPath());
+                    editorPane.setText(fileContent);
+                    JOptionPane.showMessageDialog(null, "File opened.");
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error opening file.");
+                }
+
+            }
 
         });
 
@@ -143,6 +164,7 @@ public class App {
 
         });
 
+        fileMenu.add(openItem);
         fileMenu.add(newItem);
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
