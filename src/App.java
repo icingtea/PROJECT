@@ -18,6 +18,7 @@ public class App {
 
     private final static Font defaultFont = new Font("OCR A Extended", Font.PLAIN, 16);
 
+    private static JButton closeButton = createCloseButton();
     private static JFileChooser saveFileChooser = new JFileChooser();
     private static JFileChooser openFileChooser = new JFileChooser();
     private static JMenu fileMenu = createFileMenu();
@@ -266,6 +267,24 @@ public class App {
 
     }
 
+    private static JButton createCloseButton() {
+
+        JButton closeButton = new JButton(" ✖ ");
+        closeButton.setBackground(COLORS[0]);
+        closeButton.setForeground(COLORS[2]);
+        closeButton.setBorder(BorderFactory.createEmptyBorder());
+        closeButton.setContentAreaFilled(false);
+
+        closeButton.addActionListener(l -> {
+
+            System.exit(0);
+
+        });
+
+        return closeButton;
+
+    }
+
     private static JMenuBar createMenuBar() {
 
         JMenuBar menuBar = new JMenuBar();
@@ -275,17 +294,19 @@ public class App {
         
         menuBar.add(fileMenu);
         menuBar.add(fontMenu);
-        
+
         menuBar.add(Box.createHorizontalGlue());
 
-        JLabel fontSizeLabel = new JLabel("Font Size: ");
+        JLabel fontSizeLabel = new JLabel("Font Size:");
         fontSizeLabel.setFont(defaultFont);
         fontSizeLabel.setBackground(COLORS[0]);
         fontSizeLabel.setForeground(COLORS[2]);
 
         menuBar.add(fontSizeLabel);
+        menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(fontSizeField);
-
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(closeButton);
         menuBar.add(Box.createHorizontalStrut(10));
 
         return menuBar;
