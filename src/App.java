@@ -9,20 +9,20 @@ import java.nio.file.Files;
 
 public class App {
 
-
     private final static Color[] COLORS = {
-        new Color(0x121213), //0 grey
+        new Color(0x151515), //0 grey
         new Color(0xD924A5), //1 pink
         new Color(0x0ECAD1),  //2 blue
-        new Color(0x3A3A3A)  //3 light grey
+        new Color(0x212121)  //3 light grey
     };
 
     private final static Font defaultFont = new Font("OCR A Extended", Font.PLAIN, 16);
-    private final static Font menuFont = new Font("OCR A Extended", Font.PLAIN, 16);
 
     private static JFileChooser saveFileChooser = new JFileChooser();
     private static JFileChooser openFileChooser = new JFileChooser();
     private static JMenu fileMenu = createFileMenu();
+    private static JMenu fontMenu = createFontMenu();
+    private static JTextField fontSizeField = createFontSizeField();
     private static JMenuBar menuBar = createMenuBar();
     private static JFrame frame = createFrame();
     private static JEditorPane editorPane = createEditorPane(frame);
@@ -84,7 +84,7 @@ public class App {
             @Override
             public Dimension getPreferredSize(JComponent C) {
 
-                return new Dimension(10, super.getPreferredSize(C).height);
+                return new Dimension(7, super.getPreferredSize(C).height);
 
             }
 
@@ -129,11 +129,11 @@ public class App {
 
         JMenuItem menuItem = new JMenuItem(s);
 
-        menuItem.setFont(menuFont);
+        menuItem.setFont(defaultFont);
         menuItem.setBackground(COLORS[0]);
         menuItem.setForeground(COLORS[1]);
         menuItem.setBorder(BorderFactory.createEmptyBorder());
-        menuItem.setPreferredSize(new Dimension(80, 30));
+        menuItem.setPreferredSize(new Dimension(120, 30));
         menuItem.setOpaque(true);
 
         return menuItem;
@@ -147,11 +147,12 @@ public class App {
         UIManager.put("MenuItem.selectionBackground", COLORS[3]);
         UIManager.put("MenuItem.selectionForeground", COLORS[2]);
 
-        JMenu fileMenu = new JMenu("File");
-        fileMenu.setFont(menuFont);
+        JMenu fileMenu = new JMenu(" File ");
+        fileMenu.setFont(defaultFont);
         fileMenu.setForeground(COLORS[1]);
+        fileMenu.setBorder(BorderFactory.createEmptyBorder());
         fileMenu.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
-        fileMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 0, 2, 1, COLORS[2]));
+        fileMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 1, 2, 2, COLORS[2]));
 
         JMenuItem newItem = createMenuItem("New");
         JMenuItem openItem = createMenuItem("Open");
@@ -209,20 +210,59 @@ public class App {
                 JOptionPane.showMessageDialog(null, "Save cancelled.");
             }
 
-        });
-
+        });    
         exitItem.addActionListener(l -> {
-
             System.exit(0);
-
         });
 
         fileMenu.add(openItem);
         fileMenu.add(newItem);
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
-
         return fileMenu;
+
+    }
+    
+    private static JMenu createFontMenu() {
+
+        UIManager.put("Menu.selectionBackground", COLORS[3]);
+        UIManager.put("Menu.selectionForeground", COLORS[2]);
+        UIManager.put("MenuItem.selectionBackground", COLORS[3]);
+        UIManager.put("MenuItem.selectionForeground", COLORS[2]);
+
+        JMenu fontMenu = new JMenu(" Font ");
+        fontMenu.setFont(defaultFont);
+        fontMenu.setForeground(COLORS[1]);
+        fontMenu.setBorder(BorderFactory.createEmptyBorder());
+        fontMenu.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
+        fontMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, COLORS[2]));
+
+        JMenuItem newItem = createMenuItem("OCR A");
+        JMenuItem openItem = createMenuItem("Monospaced");
+        JMenuItem saveItem = createMenuItem("Courier New");
+        JMenuItem exitItem = createMenuItem("Consolas");
+
+        fontMenu.add(openItem);
+        fontMenu.add(newItem);
+        fontMenu.add(saveItem);
+        fontMenu.add(exitItem);
+        return fontMenu;
+
+    }
+
+    private static JTextField createFontSizeField() {
+
+        JTextField fontSizeField = new JTextField("16");
+        fontSizeField.setMaximumSize(new Dimension(1000, 30));
+        fontSizeField.setMinimumSize(new Dimension(1000, 30));
+
+        fontSizeField.setBackground(COLORS[0]);
+        fontSizeField.setForeground(COLORS[1]);
+        fontSizeField.setBorder(BorderFactory.createEmptyBorder());
+        fontSizeField.setBorder(BorderFactory.createLineBorder(COLORS[2], 1));
+        fontSizeField.setFont(defaultFont);
+
+        return fontSizeField;
 
     }
 
@@ -232,8 +272,21 @@ public class App {
         menuBar.setBackground(COLORS[0]);
         menuBar.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLORS[2]));
         menuBar.setPreferredSize(new Dimension(600, 40));
-
+        
         menuBar.add(fileMenu);
+        menuBar.add(fontMenu);
+        
+        menuBar.add(Box.createHorizontalGlue());
+
+        JLabel fontSizeLabel = new JLabel("Font Size: ");
+        fontSizeLabel.setFont(defaultFont);
+        fontSizeLabel.setBackground(COLORS[0]);
+        fontSizeLabel.setForeground(COLORS[2]);
+
+        menuBar.add(fontSizeLabel);
+        menuBar.add(fontSizeField);
+
+        menuBar.add(Box.createHorizontalStrut(10));
 
         return menuBar;
 
