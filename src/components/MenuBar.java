@@ -23,12 +23,13 @@ public class MenuBar {
         menuBar.add(Box.createHorizontalGlue());
 
         menuBar.add(Misc.wordCountField);
-        menuBar.add(Box.createHorizontalStrut(20));
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(Misc.boldButton);
+        menuBar.add(Misc.italicButton);
+        menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(Misc.fontSizeLabel);
         menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(FontSizeManager.plusButton);
-        menuBar.add(Box.createHorizontalStrut(10));
-        menuBar.add(FontSizeManager.fontSizeField);
         menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(FontSizeManager.minusButton);
         menuBar.add(Box.createHorizontalStrut(20));

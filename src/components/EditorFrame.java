@@ -1,6 +1,11 @@
 package components;
 
 import javax.swing.*;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.Document;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.*;
 import utils.Constants;
 
@@ -10,7 +15,8 @@ public class EditorFrame {
 
     public static JFrame frame = createFrame();
     public static JTextPane textPane = TextPane.createTextPane(frame);
-    
+    public static StyledDocument styledDocument = textPane.getStyledDocument();
+
     private static JFrame createFrame() {
 
         JFrame frame = new JFrame("TEXT EDITOR");

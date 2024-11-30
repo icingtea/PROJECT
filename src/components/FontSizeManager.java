@@ -8,25 +8,8 @@ public class FontSizeManager {
     
     private static Color[] COLORS = Constants.COLORS;
     private static Font DEFAULT_FONT = Constants.DEFAULT_FONT;
-
-    public static JLabel fontSizeField = createFontSizeField();
     public static JButton plusButton = createPlusButton();
     public static JButton minusButton = createMinusButton();
-    
-    private static JLabel createFontSizeField() {
-
-        JLabel fontSizeField = new JLabel("16");
-        fontSizeField.setMaximumSize(new Dimension(100, 30));
-        fontSizeField.setMinimumSize(new Dimension(100, 30));
-
-        fontSizeField.setBackground(COLORS[0]);
-        fontSizeField.setForeground(COLORS[1]);
-        fontSizeField.setBorder(BorderFactory.createEmptyBorder());
-        fontSizeField.setFont(DEFAULT_FONT);
-
-        return fontSizeField;
-
-    }
 
     private static JButton createPlusButton() {
 
@@ -37,13 +20,6 @@ public class FontSizeManager {
         plusButton.setContentAreaFilled(false);
 
         plusButton.addActionListener(l -> {
-
-            int currentSize = Integer.parseInt(fontSizeField.getText());
-            if (currentSize < 30) {
-                currentSize += 1;
-            }
-
-            fontSizeField.setText(Integer.toString(currentSize));
 
         });
 
@@ -60,13 +36,6 @@ public class FontSizeManager {
         minusButton.setContentAreaFilled(false);
 
         minusButton.addActionListener(l -> {
-
-            int currentSize = Integer.parseInt(fontSizeField.getText());
-            if (currentSize > 1) {
-                currentSize -= 1;
-            }
-
-            fontSizeField.setText(Integer.toString(currentSize));
 
         });
 
