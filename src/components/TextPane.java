@@ -13,6 +13,18 @@ public class TextPane {
     private static Color[] COLORS = Constants.COLORS;
     private static Font DEFAULT_FONT = Constants.DEFAULT_FONT;
 
+    private static void setCounts(JTextPane p) {
+
+        String text = p.getText();
+        String[] words = text.split("\\s+");
+                
+        int charCount = text.length();
+        int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
+
+        Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+
+    }
+
     public static JTextPane createTextPane(JFrame frame) {
 
         JTextPane textPane = new JTextPane();
@@ -78,39 +90,21 @@ public class TextPane {
             @Override
             public void insertUpdate(DocumentEvent e) {
 
-                String text = textPane.getText();
-                String[] words = text.split("\\s+");
-
-                int charCount = text.length();
-                int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
-
-                Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+                setCounts(textPane);
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
 
-                String text = textPane.getText();
-                String[] words = text.split("\\s+");
-                
-                int charCount = text.length();
-                int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
-
-                Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+                setCounts(textPane);
 
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
 
-                String text = textPane.getText();
-                String[] words = text.split("\\s+");
-                
-                int charCount = text.length();
-                int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
-
-                Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+                setCounts(textPane);
 
             }
             

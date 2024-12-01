@@ -25,7 +25,7 @@ public class Misc {
     private static JLabel createWordCountField() {
 
         JLabel wordCountField = new JLabel("Character Count: 0 | Word Count: 0");
-        wordCountField.setMaximumSize(new Dimension(300, 30));
+        wordCountField.setMaximumSize(new Dimension(450, 30));
         wordCountField.setMinimumSize(new Dimension(300, 30));
 
         wordCountField.setBackground(COLORS[0]);
