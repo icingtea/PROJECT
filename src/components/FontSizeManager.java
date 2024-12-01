@@ -1,13 +1,14 @@
 package components;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.*;
 import utils.Constants;
 
 public class FontSizeManager {
     
     private static Color[] COLORS = Constants.COLORS;
-    private static Font DEFAULT_FONT = Constants.DEFAULT_FONT;
     public static JButton plusButton = createPlusButton();
     public static JButton minusButton = createMinusButton();
 
@@ -21,6 +22,24 @@ public class FontSizeManager {
 
         plusButton.addActionListener(l -> {
 
+        });
+
+        plusButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                plusButton.setForeground(COLORS[1]);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+                plusButton.setForeground(COLORS[2]);
+
+            }
+            
         });
 
         return plusButton;
@@ -37,6 +56,24 @@ public class FontSizeManager {
 
         minusButton.addActionListener(l -> {
 
+        });
+
+        minusButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                minusButton.setForeground(COLORS[1]);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+                minusButton.setForeground(COLORS[2]);
+
+            }
+            
         });
 
         return minusButton;

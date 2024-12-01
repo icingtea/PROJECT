@@ -2,10 +2,6 @@ package components;
 
 import javax.swing.*;
 import javax.swing.text.StyledDocument;
-import javax.swing.text.Document;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import java.awt.*;
 import utils.Constants;
 

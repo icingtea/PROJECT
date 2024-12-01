@@ -3,6 +3,8 @@ package components;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import java.awt.*;
 import utils.Constants;
@@ -76,6 +78,23 @@ public class Misc {
             
         });
 
+        boldButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                boldButton.setForeground(COLORS[1]);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+                boldButton.setForeground(COLORS[2]);
+
+            }
+        });
+
+
         return boldButton;
 
     }
@@ -100,7 +119,6 @@ public class Misc {
         
                 StyleConstants.setItalic(attr, !isCurrentlyItalic);
                 EditorFrame.textPane.setCharacterAttributes(attr, false);
-
             } else {
                 SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(start).getAttributes());
                 boolean isCurrentlyItalic = StyleConstants.isItalic(attr);
@@ -108,6 +126,24 @@ public class Misc {
                 StyleConstants.setItalic(attr, !isCurrentlyItalic);
                 EditorFrame.styledDocument.setCharacterAttributes(start, end - start, attr, false);
             } 
+
+        });
+
+        italicButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                italicButton.setForeground(COLORS[1]);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+                italicButton.setForeground(COLORS[2]);
+
+            }
 
         });
 
@@ -122,6 +158,24 @@ public class Misc {
         closeButton.setForeground(COLORS[2]);
         closeButton.setBorder(BorderFactory.createEmptyBorder());
         closeButton.setContentAreaFilled(false);
+
+        closeButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                closeButton.setForeground(COLORS[1]);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+                closeButton.setForeground(COLORS[2]);
+
+            }
+            
+        });
 
         closeButton.addActionListener(l -> {
 

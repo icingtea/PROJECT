@@ -1,6 +1,8 @@
 package components;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import utils.Constants;
 
@@ -25,15 +27,63 @@ public class FontMenu {
         fontMenu.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
         fontMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, COLORS[2]));
 
-        JMenuItem newItem = MenuItem.createMenuItem("OCR A");
-        JMenuItem openItem = MenuItem.createMenuItem("Monospaced");
-        JMenuItem saveItem = MenuItem.createMenuItem("Courier New");
-        JMenuItem exitItem = MenuItem.createMenuItem("Consolas");
+        JMenuItem OCRAItem = MenuItem.createMenuItem("OCR A");
+        JMenuItem SimSunItem = MenuItem.createMenuItem("SimSun");
+        JMenuItem CourierNewItem = MenuItem.createMenuItem("Courier New");
+        JMenuItem ConsolasItem = MenuItem.createMenuItem("Consolas");
 
-        fontMenu.add(openItem);
-        fontMenu.add(newItem);
-        fontMenu.add(saveItem);
-        fontMenu.add(exitItem);
+        OCRAItem.addActionListener(l -> {
+
+            int start = EditorFrame.textPane.getSelectionStart();
+            int end = EditorFrame.textPane.getSelectionEnd();
+
+            SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(start).getAttributes());
+            StyleConstants.setFontFamily(attr, "OCR A Extended");
+            EditorFrame.textPane.setCharacterAttributes(attr, false);
+            EditorFrame.styledDocument.setCharacterAttributes(start, end - start, attr, false);
+            
+        });
+
+        SimSunItem.addActionListener(l -> {
+
+            int start = EditorFrame.textPane.getSelectionStart();
+            int end = EditorFrame.textPane.getSelectionEnd();
+
+            SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(start).getAttributes());
+            StyleConstants.setFontFamily(attr, "SimSun");
+            EditorFrame.textPane.setCharacterAttributes(attr, false);
+            EditorFrame.styledDocument.setCharacterAttributes(start, end - start, attr, false);
+            
+        });
+
+        CourierNewItem.addActionListener(l -> {
+
+            int start = EditorFrame.textPane.getSelectionStart();
+            int end = EditorFrame.textPane.getSelectionEnd();
+        
+            SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(start).getAttributes());
+            StyleConstants.setFontFamily(attr, "Courier New");
+            EditorFrame.textPane.setCharacterAttributes(attr, false);
+            EditorFrame.styledDocument.setCharacterAttributes(start, end - start, attr, false);
+            
+        });
+        
+        ConsolasItem.addActionListener(l -> {
+
+            int start = EditorFrame.textPane.getSelectionStart();
+            int end = EditorFrame.textPane.getSelectionEnd();
+
+            SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(start).getAttributes());
+            StyleConstants.setFontFamily(attr, "Consolas");
+            EditorFrame.textPane.setCharacterAttributes(attr, false);
+            EditorFrame.styledDocument.setCharacterAttributes(start, end - start, attr, false);
+            
+        });
+
+        fontMenu.add(OCRAItem);
+        fontMenu.add(SimSunItem);
+        fontMenu.add(CourierNewItem);
+        fontMenu.add(ConsolasItem);
         return fontMenu;
 
     }
