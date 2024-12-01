@@ -24,9 +24,9 @@ public class Misc {
 
     private static JLabel createWordCountField() {
 
-        JLabel wordCountField = new JLabel("Word Count: 0");
-        wordCountField.setMaximumSize(new Dimension(100, 30));
-        wordCountField.setMinimumSize(new Dimension(100, 30));
+        JLabel wordCountField = new JLabel("Character Count: 0 | Word Count: 0");
+        wordCountField.setMaximumSize(new Dimension(300, 30));
+        wordCountField.setMinimumSize(new Dimension(300, 30));
 
         wordCountField.setBackground(COLORS[0]);
         wordCountField.setForeground(COLORS[4]);
@@ -155,7 +155,7 @@ public class Misc {
 
         JButton closeButton = new JButton("✖");
         closeButton.setBackground(COLORS[0]);
-        closeButton.setForeground(COLORS[2]);
+        closeButton.setForeground(COLORS[1]);
         closeButton.setBorder(BorderFactory.createEmptyBorder());
         closeButton.setContentAreaFilled(false);
 
@@ -164,14 +164,14 @@ public class Misc {
             @Override
             public void mouseEntered(MouseEvent e) {
 
-                closeButton.setForeground(COLORS[1]);
+                closeButton.setForeground(COLORS[2]);
 
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
 
-                closeButton.setForeground(COLORS[2]);
+                closeButton.setForeground(COLORS[1]);
 
             }
             

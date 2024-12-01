@@ -1,6 +1,9 @@
 package components;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import utils.Constants;
@@ -20,6 +23,7 @@ public class TextPane {
         textPane.setForeground(COLORS[1]);
         textPane.setFont(DEFAULT_FONT);
         textPane.setMargin(new Insets(20, 20, 20, 20));
+        textPane.setText("");
 
         JScrollPane scrollPane = new JScrollPane(textPane);
 
@@ -66,6 +70,51 @@ public class TextPane {
 
                 return b;
             }
+
+        });
+
+        textPane.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+                String text = textPane.getText();
+                String[] words = text.split("\\s+");
+
+                int charCount = text.length();
+                int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
+
+                Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+                String text = textPane.getText();
+                String[] words = text.split("\\s+");
+                
+                int charCount = text.length();
+                int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
+
+                Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+                String text = textPane.getText();
+                String[] words = text.split("\\s+");
+                
+                int charCount = text.length();
+                int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
+
+                Misc.wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
+
+            }
+            
+
 
         });
 

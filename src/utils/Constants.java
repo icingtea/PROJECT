@@ -17,6 +17,7 @@ public class Constants {
     public final static Font DEFAULT_FONT = new Font("OCR A Extended", Font.PLAIN, 16);
     public final static Font ITALIC_FONT = new Font("OCR A Extended", Font.ITALIC, 16);
     public final static Font BOLD_FONT = new Font("OCR A Extended", Font.BOLD, 16);
+    public final static Font SYMBOL_FONT = new Font("OCR A EXTENDED", Font.PLAIN, 25);
 
     public static JFileChooser saveFileChooser = new JFileChooser();
     public static JFileChooser openFileChooser = new JFileChooser();

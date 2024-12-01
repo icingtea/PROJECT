@@ -9,12 +9,15 @@ import utils.Constants;
 public class FontSizeManager {
     
     private static Color[] COLORS = Constants.COLORS;
+    private static Font SYMBOL_FONT = Constants.SYMBOL_FONT;
+
     public static JButton plusButton = createPlusButton();
     public static JButton minusButton = createMinusButton();
 
     private static JButton createPlusButton() {
 
         JButton plusButton = new JButton("+");
+        plusButton.setFont(SYMBOL_FONT);
         plusButton.setBackground(COLORS[0]);
         plusButton.setForeground(COLORS[2]);
         plusButton.setBorder(BorderFactory.createEmptyBorder());
@@ -49,6 +52,7 @@ public class FontSizeManager {
     private static JButton createMinusButton() {
 
         JButton minusButton = new JButton("-");
+        minusButton.setFont(SYMBOL_FONT);
         minusButton.setBackground(COLORS[0]);
         minusButton.setForeground(COLORS[2]);
         minusButton.setBorder(BorderFactory.createEmptyBorder());
