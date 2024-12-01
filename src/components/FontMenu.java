@@ -73,7 +73,7 @@ public class FontMenu {
             int start = EditorFrame.textPane.getSelectionStart();
             int end = EditorFrame.textPane.getSelectionEnd();
 
-            SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(start).getAttributes());
+            SimpleAttributeSet attr = new SimpleAttributeSet(EditorFrame.styledDocument.getCharacterElement(end).getAttributes());
             StyleConstants.setFontFamily(attr, "Consolas");
             EditorFrame.textPane.setCharacterAttributes(attr, false);
             EditorFrame.styledDocument.setCharacterAttributes(start, end - start, attr, false);

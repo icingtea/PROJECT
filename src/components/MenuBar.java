@@ -31,6 +31,8 @@ public class MenuBar {
         menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(FontSizeManager.plusButton);
         menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(FontSizeManager.fontSizeField);
+        menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(FontSizeManager.minusButton);
         menuBar.add(Box.createHorizontalStrut(20));
         menuBar.add(Misc.closeButton);
