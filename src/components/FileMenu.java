@@ -62,7 +62,7 @@ public class FileMenu {
 
         saveItem.addActionListener(l -> {
         
-            saveFileChooser.setFileFilter(new FileNameExtensionFilter("Text Documents (*.txt)", "txt"));
+            saveFileChooser.setFileFilter(new FileNameExtensionFilter("RTF Documents (*.rtf)", "rtf"));
             int option = saveFileChooser.showSaveDialog(EditorFrame.frame);
 
             if (option == JFileChooser.APPROVE_OPTION) {

@@ -1,11 +1,8 @@
 package components;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
+import javax.swing.text.*;
+import java.awt.event.*;
 import java.awt.*;
 import utils.Constants;
 
@@ -16,6 +13,7 @@ public class Misc {
     private static Font ITALIC_FONT = Constants.ITALIC_FONT;
     private static Font BOLD_FONT = Constants.BOLD_FONT;
 
+    public static JButton sketchButton = createSketchButton();
     public static JButton closeButton = createCloseButton();
     public static JButton boldButton = createBoldButton();
     public static JButton italicButton = createItalicButton();
@@ -79,6 +77,7 @@ public class Misc {
         });
 
         boldButton.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mouseEntered(MouseEvent e) {
 
@@ -92,6 +91,7 @@ public class Misc {
                 boldButton.setForeground(COLORS[2]);
 
             }
+
         });
 
 
@@ -184,6 +184,43 @@ public class Misc {
         });
 
         return closeButton;
+
+    }
+
+    private static JButton createSketchButton() {
+
+        JButton sketchButton = new JButton("SketchPad");
+        sketchButton.setFont(DEFAULT_FONT);
+        sketchButton.setBackground(COLORS[0]);
+        sketchButton.setForeground(COLORS[2]);
+        sketchButton.setBorder(BorderFactory.createEmptyBorder());
+        sketchButton.setContentAreaFilled(false);
+
+        sketchButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                sketchButton.setForeground(COLORS[1]);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+                sketchButton.setForeground(COLORS[2]);
+
+            }
+
+        });
+
+        sketchButton.addActionListener(l -> {
+
+            SketchFrame.sketchFrame.setVisible(true);
+
+        });
+
+        return sketchButton;
 
     }
     

@@ -1,11 +1,8 @@
 package components;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.text.*;
+import java.awt.event.*;
 import java.awt.*;
 import utils.Constants;
 

@@ -17,14 +17,14 @@ public class EditorFrame {
 
         JFrame frame = new JFrame("TEXT EDITOR");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 600);
+        frame.setSize(1150, 500);
         frame.setUndecorated(true);
         frame.setJMenuBar(MenuBar.menuBar);
 
         JRootPane rootPane = frame.getRootPane();
         rootPane.setBorder(BorderFactory.createMatteBorder(2,2,2,2, COLORS[1]));
 
-        frame.setLocationRelativeTo(null);
+        frame.setLocation(new Point(30, 100));
 
         return frame;
 

@@ -15,13 +15,15 @@ public class MenuBar {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBackground(COLORS[0]);
         menuBar.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLORS[2]));
-        menuBar.setPreferredSize(new Dimension(600, 40));
+        menuBar.setPreferredSize(new Dimension(1150, 40));
         
         menuBar.add(FileMenu.fileMenu);
         menuBar.add(FontMenu.fontMenu);
 
         menuBar.add(Box.createHorizontalGlue());
 
+        menuBar.add(Misc.sketchButton);
+        menuBar.add(Box.createHorizontalStrut(20));
         menuBar.add(Misc.wordCountField);
         menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(Misc.boldButton);
