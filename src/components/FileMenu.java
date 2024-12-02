@@ -3,7 +3,6 @@ package components;
 import java.io.*;
 import java.nio.file.Files;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.rtf.RTFEditorKit;
 
 import java.awt.*;
