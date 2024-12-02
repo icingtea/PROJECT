@@ -2,6 +2,8 @@ package components;
 
 import javax.swing.*;
 import javax.swing.text.StyledDocument;
+import javax.swing.text.rtf.RTFEditorKit;
+
 import java.awt.*;
 import utils.Constants;
 

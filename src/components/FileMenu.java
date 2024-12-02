@@ -1,10 +1,11 @@
 package components;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.nio.file.Files;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.rtf.RTFEditorKit;
+
 import java.awt.*;
 import utils.Constants;
 
@@ -43,51 +44,51 @@ public class FileMenu {
         });
 
         openItem.addActionListener(l -> {
-
             int option = openFileChooser.showOpenDialog(EditorFrame.frame);
-
+        
             if (option == JFileChooser.APPROVE_OPTION) {
                 File file = openFileChooser.getSelectedFile();
                 try {
-                    String fileContent = Files.readString(file.toPath());
-                    EditorFrame.textPane.setText(fileContent);
-                    JOptionPane.showMessageDialog(null, "File opened.");
-                } catch(Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error opening file.");
+                    if (file.getName().toLowerCase().endsWith(".rtf")) {
+                        FileInputStream rtfStream = new FileInputStream(file);
+                        RTFEditorKit rtfEditorKit = new RTFEditorKit();
+                        rtfEditorKit.read(rtfStream, EditorFrame.textPane.getDocument(), 0);
+                        rtfStream.close();
+                        JOptionPane.showMessageDialog(null, "File opened.");
+                    } else {
+                        String fileContent = Files.readString(file.toPath());
+                        EditorFrame.textPane.setText(fileContent);
+                        JOptionPane.showMessageDialog(null, "File opened.");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error opening file: " + e.getMessage());
                 }
-
             }
-
         });
-
-        saveItem.addActionListener(l -> {
         
-            saveFileChooser.setFileFilter(new FileNameExtensionFilter("RTF Documents (*.rtf)", "rtf"));
+        saveItem.addActionListener(l -> {
             int option = saveFileChooser.showSaveDialog(EditorFrame.frame);
-
+        
             if (option == JFileChooser.APPROVE_OPTION) {
                 File file = saveFileChooser.getSelectedFile();
-                FileWriter fileWriter = null;
-
+                if (!file.getName().toLowerCase().endsWith(".rtf")) {
+                    file = new File(file.getAbsolutePath() + ".rtf");
+                }
+        
                 try {
-                    fileWriter = new FileWriter(file);
-                    fileWriter.write(EditorFrame.textPane.getText());
+                    FileOutputStream rtfStream = new FileOutputStream(file);
+                    RTFEditorKit rtfEditorKit= new RTFEditorKit();
+                    rtfEditorKit.write(rtfStream, EditorFrame.textPane.getDocument(), 0, EditorFrame.textPane.getDocument().getLength());
+                    rtfStream.close();
                     JOptionPane.showMessageDialog(null, "File saved.");
-                    saveFileChooser.rescanCurrentDirectory();
-                } catch(Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error saving file.");
-                } finally {
-                    try { 
-                        fileWriter.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error saving file: " + e.getMessage());
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Save cancelled.");
             }
-
-        });    
+        });
+        
         exitItem.addActionListener(l -> {
             System.exit(0);
         });

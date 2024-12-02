@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+
 import utils.Constants;
 
 public class TextPane {
@@ -117,7 +118,5 @@ public class TextPane {
         return textPane;
     
     }
-
-    
     
 }
