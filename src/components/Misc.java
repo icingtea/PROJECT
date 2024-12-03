@@ -2,6 +2,9 @@ package components;
 
 import javax.swing.*;
 import javax.swing.text.*;
+
+import components.sketchpad.SketchFrame;
+
 import java.awt.*;
 
 import utils.Constants;

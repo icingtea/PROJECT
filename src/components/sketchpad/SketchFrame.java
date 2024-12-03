@@ -1,4 +1,4 @@
-package components;
+package components.sketchpad;
 
 import javax.swing.*;
 import java.awt.*;

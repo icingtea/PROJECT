@@ -1,8 +1,9 @@
-package components;
+package components.sketchpad;
 
 import javax.swing.*;
 import java.awt.*;
 
+import components.VisualHelpers;
 import utils.Constants;
 
 public class SketchMenu {
