@@ -18,7 +18,10 @@ public class Misc {
     public static JButton boldButton = createBoldButton();
     public static JButton italicButton = createItalicButton();
     public static JLabel wordCountField = createWordCountField();
-    public static JLabel fontSizeLabel = createFontSizeLabel();
+    public static JLabel findLabel = createFindLabel();
+    public static JTextField findField = createFindField();
+    public static JLabel replaceLabel = createReplaceLabel();
+    public static JTextField replaceField = createReplaceField();
 
     private static JLabel createWordCountField() {
 
@@ -32,17 +35,6 @@ public class Misc {
         wordCountField.setFont(DEFAULT_FONT);
 
         return wordCountField;
-
-    }
-
-    private static JLabel createFontSizeLabel() {
-        
-        JLabel fontSizeLabel = new JLabel("Font Size:");
-        fontSizeLabel.setFont(DEFAULT_FONT);
-        fontSizeLabel.setBackground(COLORS[0]);
-        fontSizeLabel.setForeground(COLORS[2]);
-
-        return fontSizeLabel;
 
     }
 
@@ -184,6 +176,60 @@ public class Misc {
         });
 
         return closeButton;
+
+    }
+
+    private static JLabel createFindLabel() {
+
+        JLabel findLabel = new JLabel("Find: ");
+        findLabel.setFont(DEFAULT_FONT);
+        findLabel.setBackground(COLORS[0]);
+        findLabel.setForeground(COLORS[2]);
+        findLabel.setBorder(BorderFactory.createEmptyBorder());
+
+        return findLabel;
+
+    }
+
+    private static JTextField createFindField() {
+
+        JTextField findField = new JTextField();
+
+        findField.setMaximumSize(new Dimension(20000, 30));
+        findField.setFont(DEFAULT_FONT);
+        findField.setBackground(COLORS[0]);
+        findField.setForeground(COLORS[1]);
+        findField.setBorder(BorderFactory.createEmptyBorder());
+        findField.setBorder(BorderFactory.createLineBorder(COLORS[2], 1));
+
+        return findField;
+
+    }
+
+    private static JLabel createReplaceLabel() {
+
+        JLabel replaceLabel = new JLabel("Replace: ");
+        replaceLabel.setFont(DEFAULT_FONT);
+        replaceLabel.setBackground(COLORS[0]);
+        replaceLabel.setForeground(COLORS[2]);
+        replaceLabel.setBorder(BorderFactory.createEmptyBorder());
+
+        return replaceLabel;
+
+    }
+
+    private static JTextField createReplaceField() {
+
+        JTextField replaceField = new JTextField();
+
+        replaceField.setMaximumSize(new Dimension(20000, 30));
+        replaceField.setFont(DEFAULT_FONT);
+        replaceField.setBackground(COLORS[0]);
+        replaceField.setForeground(COLORS[1]);
+        replaceField.setBorder(BorderFactory.createEmptyBorder());
+        replaceField.setBorder(BorderFactory.createLineBorder(COLORS[2], 1));
+
+        return replaceField;
 
     }
 

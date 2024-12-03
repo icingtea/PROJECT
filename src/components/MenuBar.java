@@ -19,6 +19,12 @@ public class MenuBar {
         
         menuBar.add(FileMenu.fileMenu);
         menuBar.add(FontMenu.fontMenu);
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(Misc.findLabel);
+        menuBar.add(Misc.findField);
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(Misc.replaceLabel);
+        menuBar.add(Misc.replaceField);
 
         menuBar.add(Box.createHorizontalGlue());
 
@@ -28,8 +34,6 @@ public class MenuBar {
         menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(Misc.boldButton);
         menuBar.add(Misc.italicButton);
-        menuBar.add(Box.createHorizontalStrut(10));
-        menuBar.add(Misc.fontSizeLabel);
         menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(FontSizeManager.plusButton);
         menuBar.add(Box.createHorizontalStrut(10));
