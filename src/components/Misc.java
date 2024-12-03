@@ -2,8 +2,8 @@ package components;
 
 import javax.swing.*;
 import javax.swing.text.*;
-import java.awt.event.*;
 import java.awt.*;
+
 import utils.Constants;
 
 public class Misc {
@@ -28,13 +28,21 @@ public class Misc {
         JLabel wordCountField = new JLabel("Character Count: 0 | Word Count: 0");
         wordCountField.setMaximumSize(new Dimension(450, 30));
         wordCountField.setMinimumSize(new Dimension(300, 30));
-
-        wordCountField.setBackground(COLORS[0]);
-        wordCountField.setForeground(COLORS[4]);
-        wordCountField.setBorder(BorderFactory.createEmptyBorder());
-        wordCountField.setFont(DEFAULT_FONT);
+        VisualHelpers.labelFormat(wordCountField, COLORS[4]);
 
         return wordCountField;
+
+    }
+
+    public static void setCounts(JTextPane p) {
+
+        String text = p.getText();
+        String[] words = text.split("\\s+");
+                
+        int charCount = text.length();
+        int wordCount = (words.length > 0 &&  text.length() > 0) ? words.length : 0;
+
+        wordCountField.setText("Character Count : " + charCount + " | Word Count: " + wordCount);
 
     }
 
@@ -42,10 +50,7 @@ public class Misc {
 
         JButton boldButton = new JButton(" B ");
         boldButton.setFont(BOLD_FONT);
-        boldButton.setBackground(COLORS[0]);
-        boldButton.setForeground(COLORS[2]);
-        boldButton.setBorder(BorderFactory.createEmptyBorder());
-        boldButton.setContentAreaFilled(false);
+        VisualHelpers.buttonFormat(boldButton, COLORS[2], COLORS[1]);
 
         boldButton.addActionListener(l -> {
 
@@ -68,25 +73,6 @@ public class Misc {
             
         });
 
-        boldButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                boldButton.setForeground(COLORS[1]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                boldButton.setForeground(COLORS[2]);
-
-            }
-
-        });
-
-
         return boldButton;
 
     }
@@ -95,10 +81,7 @@ public class Misc {
 
         JButton italicButton = new JButton(" I ");
         italicButton.setFont(ITALIC_FONT);
-        italicButton.setBackground(COLORS[0]);
-        italicButton.setForeground(COLORS[2]);
-        italicButton.setBorder(BorderFactory.createEmptyBorder());
-        italicButton.setContentAreaFilled(false);
+        VisualHelpers.buttonFormat(italicButton, COLORS[2], COLORS[1]);
 
         italicButton.addActionListener(l -> {
 
@@ -121,24 +104,6 @@ public class Misc {
 
         });
 
-        italicButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                italicButton.setForeground(COLORS[1]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                italicButton.setForeground(COLORS[2]);
-
-            }
-
-        });
-
         return italicButton;
 
     }
@@ -146,28 +111,7 @@ public class Misc {
     private static JButton createCloseButton() {
 
         JButton closeButton = new JButton("✖");
-        closeButton.setBackground(COLORS[0]);
-        closeButton.setForeground(COLORS[1]);
-        closeButton.setBorder(BorderFactory.createEmptyBorder());
-        closeButton.setContentAreaFilled(false);
-
-        closeButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                closeButton.setForeground(COLORS[2]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                closeButton.setForeground(COLORS[1]);
-
-            }
-            
-        });
+        VisualHelpers.buttonFormat(closeButton, COLORS[1], COLORS[2]);
 
         closeButton.addActionListener(l -> {
 
@@ -182,10 +126,7 @@ public class Misc {
     private static JLabel createFindLabel() {
 
         JLabel findLabel = new JLabel("Find: ");
-        findLabel.setFont(DEFAULT_FONT);
-        findLabel.setBackground(COLORS[0]);
-        findLabel.setForeground(COLORS[2]);
-        findLabel.setBorder(BorderFactory.createEmptyBorder());
+        VisualHelpers.labelFormat(findLabel, COLORS[2]);
 
         return findLabel;
 
@@ -195,12 +136,39 @@ public class Misc {
 
         JTextField findField = new JTextField();
 
-        findField.setMaximumSize(new Dimension(20000, 30));
+        findField.setMaximumSize(new Dimension(105000, 25));
         findField.setFont(DEFAULT_FONT);
         findField.setBackground(COLORS[0]);
         findField.setForeground(COLORS[1]);
         findField.setBorder(BorderFactory.createEmptyBorder());
         findField.setBorder(BorderFactory.createLineBorder(COLORS[2], 1));
+
+        findField.addActionListener(l -> {
+            
+            String searchText = EditorFrame.textPane.getText();
+            Highlighter highlighter = EditorFrame.textPane.getHighlighter();
+            String searchQuery = findField.getText();
+            
+            try {
+
+                highlighter.removeAllHighlights();
+                if (searchQuery == null || searchQuery.isEmpty()) return;
+
+                int startPos = 0;
+
+                while ((startPos = searchText.indexOf(searchQuery, startPos)) >= 0) {
+
+                    int endPos = startPos + findField.getText().length();
+                    highlighter.addHighlight(startPos, endPos, new DefaultHighlighter.DefaultHighlightPainter(COLORS[5]));
+                    startPos = endPos;
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        });
 
         return findField;
 
@@ -209,10 +177,7 @@ public class Misc {
     private static JLabel createReplaceLabel() {
 
         JLabel replaceLabel = new JLabel("Replace: ");
-        replaceLabel.setFont(DEFAULT_FONT);
-        replaceLabel.setBackground(COLORS[0]);
-        replaceLabel.setForeground(COLORS[2]);
-        replaceLabel.setBorder(BorderFactory.createEmptyBorder());
+        VisualHelpers.labelFormat(replaceLabel, COLORS[2]);
 
         return replaceLabel;
 
@@ -222,12 +187,47 @@ public class Misc {
 
         JTextField replaceField = new JTextField();
 
-        replaceField.setMaximumSize(new Dimension(20000, 30));
+        replaceField.setMaximumSize(new Dimension(105000, 25));
         replaceField.setFont(DEFAULT_FONT);
         replaceField.setBackground(COLORS[0]);
         replaceField.setForeground(COLORS[1]);
         replaceField.setBorder(BorderFactory.createEmptyBorder());
         replaceField.setBorder(BorderFactory.createLineBorder(COLORS[2], 1));
+
+        replaceField.addActionListener(l -> {
+            
+            String searchText = EditorFrame.textPane.getText();
+            StringBuilder sb = new StringBuilder(searchText);
+            Highlighter highlighter = EditorFrame.textPane.getHighlighter();
+            String searchQuery = findField.getText();
+            String replacementText = replaceField.getText();
+            
+            try {
+
+                highlighter.removeAllHighlights();
+                if (searchQuery == null || searchQuery.isEmpty()) return;
+
+                int startPos = 0;
+
+                while ((startPos = searchText.indexOf(searchQuery, startPos)) >= 0) {
+
+                    int endPos = startPos + findField.getText().length();
+                    highlighter.addHighlight(startPos, endPos, new DefaultHighlighter.DefaultHighlightPainter(COLORS[5]));
+
+                    sb.replace(startPos, endPos, replacementText);
+
+                    startPos = endPos;
+
+                }
+
+                EditorFrame.textPane.setText(sb.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        });
 
         return replaceField;
 
@@ -237,28 +237,7 @@ public class Misc {
 
         JButton sketchButton = new JButton("SketchPad");
         sketchButton.setFont(DEFAULT_FONT);
-        sketchButton.setBackground(COLORS[0]);
-        sketchButton.setForeground(COLORS[2]);
-        sketchButton.setBorder(BorderFactory.createEmptyBorder());
-        sketchButton.setContentAreaFilled(false);
-
-        sketchButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                sketchButton.setForeground(COLORS[1]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                sketchButton.setForeground(COLORS[2]);
-
-            }
-
-        });
+        VisualHelpers.buttonFormat(sketchButton, COLORS[2], COLORS[1]);
 
         sketchButton.addActionListener(l -> {
 

@@ -1,8 +1,8 @@
 package components;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+
 import utils.Constants;
 
 public class SketchMenu {
@@ -36,31 +36,11 @@ public class SketchMenu {
         
         JButton closeButton = new JButton("✖");
         closeButton.setBackground(COLORS[0]);
-        closeButton.setForeground(COLORS[2]);
-        closeButton.setBorder(BorderFactory.createEmptyBorder());
-        closeButton.setContentAreaFilled(false);
-
-        closeButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                closeButton.setForeground(COLORS[1]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                closeButton.setForeground(COLORS[2]);
-
-            }
-            
-        });
+        VisualHelpers.buttonFormat(closeButton, COLORS[2], COLORS[1]);
 
         closeButton.addActionListener(l -> {
 
-            SketchFrame.sketchFrame.setVisible(false);
+            System.exit(0);
 
         });
 
@@ -82,10 +62,10 @@ public class SketchMenu {
         shapeMenu.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
         shapeMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 1, 2, 2, COLORS[1]));
 
-        JMenuItem circleItem = createMenuItem("Circle");
-        JMenuItem squareItem = createMenuItem("Square");
-        JMenuItem triangleItem = createMenuItem("Triangle");
-        JMenuItem rhombusItem = createMenuItem("Rhombus");
+        JMenuItem circleItem = VisualHelpers.createSketchMenuItem("Circle");
+        JMenuItem squareItem = VisualHelpers.createSketchMenuItem("Square");
+        JMenuItem triangleItem = VisualHelpers.createSketchMenuItem("Triangle");
+        JMenuItem rhombusItem = VisualHelpers.createSketchMenuItem("Rhombus");
 
         shapeMenu.add(circleItem);
         shapeMenu.add(squareItem);
@@ -95,20 +75,5 @@ public class SketchMenu {
         return shapeMenu;
 
     }
-
-    public static JMenuItem createMenuItem(String s) {
-
-        JMenuItem menuItem = new JMenuItem(s);
-    
-        menuItem.setFont(DEFAULT_FONT);
-        menuItem.setBackground(COLORS[0]);
-        menuItem.setForeground(COLORS[2]);
-        menuItem.setBorder(BorderFactory.createEmptyBorder());
-        menuItem.setPreferredSize(new Dimension(120, 30));
-        menuItem.setOpaque(true);
-    
-        return menuItem;
-    
-        }
 
 }

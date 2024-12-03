@@ -5,13 +5,8 @@ import java.nio.file.Files;
 import javax.swing.*;
 import javax.swing.text.rtf.RTFEditorKit;
 
-import java.awt.*;
-import utils.Constants;
-
 public class FileMenu {
 
-    private static Color[] COLORS = Constants.COLORS;
-    private static Font DEFAULT_FONT = Constants.DEFAULT_FONT;
     private static JFileChooser saveFileChooser = new JFileChooser();
     private static JFileChooser openFileChooser = new JFileChooser();
 
@@ -19,22 +14,13 @@ public class FileMenu {
 
     private static JMenu createFileMenu() {
 
-        UIManager.put("Menu.selectionBackground", COLORS[3]);
-        UIManager.put("Menu.selectionForeground", COLORS[2]);
-        UIManager.put("MenuItem.selectionBackground", COLORS[3]);
-        UIManager.put("MenuItem.selectionForeground", COLORS[2]);
-
         JMenu fileMenu = new JMenu(" File ");
-        fileMenu.setFont(DEFAULT_FONT);
-        fileMenu.setForeground(COLORS[1]);
-        fileMenu.setBorder(BorderFactory.createEmptyBorder());
-        fileMenu.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
-        fileMenu.getPopupMenu().setBorder(BorderFactory.createMatteBorder(2, 1, 2, 2, COLORS[2]));
+        VisualHelpers.menuFormat(fileMenu);
 
-        JMenuItem newItem = MenuItem.createMenuItem("New");
-        JMenuItem openItem = MenuItem.createMenuItem("Open");
-        JMenuItem saveItem = MenuItem.createMenuItem("Save");
-        JMenuItem exitItem = MenuItem.createMenuItem("Exit");
+        JMenuItem newItem = VisualHelpers.createTextMenuItem("New");
+        JMenuItem openItem = VisualHelpers.createTextMenuItem("Open");
+        JMenuItem saveItem = VisualHelpers.createTextMenuItem("Save");
+        JMenuItem exitItem = VisualHelpers.createTextMenuItem("Exit");
 
         newItem.addActionListener(l -> {
 

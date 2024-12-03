@@ -2,15 +2,14 @@ package components;
 
 import javax.swing.*;
 import javax.swing.text.*;
-import java.awt.event.*;
 import java.awt.*;
+
 import utils.Constants;
 
 public class FontSizeManager {
     
     private static Color[] COLORS = Constants.COLORS;
     private static Font SYMBOL_FONT = Constants.SYMBOL_FONT;
-    private static Font DEFAULT_FONT = Constants.DEFAULT_FONT;
 
     public static JLabel fontSizeField = createFontSizeField();
     public static JButton plusButton = createPlusButton();
@@ -20,10 +19,7 @@ public class FontSizeManager {
 
         JLabel fontSizeField = new JLabel("16");
         fontSizeField.setMaximumSize(new Dimension(100, 20));
-        fontSizeField.setFont(DEFAULT_FONT);
-        fontSizeField.setBackground(COLORS[0]);
-        fontSizeField.setForeground(COLORS[1]);
-        fontSizeField.setBorder(BorderFactory.createEmptyBorder());
+        VisualHelpers.labelFormat(fontSizeField, COLORS[1]);
         fontSizeField.setBorder(BorderFactory.createLineBorder(COLORS[2], 1));
 
         fontSizeField.addPropertyChangeListener("text", l -> {
@@ -50,36 +46,7 @@ public class FontSizeManager {
 
         JButton plusButton = new JButton("+");
         plusButton.setFont(SYMBOL_FONT);
-        plusButton.setBackground(COLORS[0]);
-        plusButton.setForeground(COLORS[2]);
-        plusButton.setBorder(BorderFactory.createEmptyBorder());
-        plusButton.setContentAreaFilled(false);
-
-        plusButton.addActionListener(l -> {
-
-        });
-
-        plusButton.addActionListener(l -> {
-
-        });
-
-        plusButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                plusButton.setForeground(COLORS[1]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                plusButton.setForeground(COLORS[2]);
-
-            }
-            
-        });
+        VisualHelpers.buttonFormat(plusButton, COLORS[2], COLORS[1]);
 
         plusButton.addActionListener(l -> {
 
@@ -96,10 +63,7 @@ public class FontSizeManager {
 
         JButton minusButton = new JButton("-");
         minusButton.setFont(SYMBOL_FONT);
-        minusButton.setBackground(COLORS[0]);
-        minusButton.setForeground(COLORS[2]);
-        minusButton.setBorder(BorderFactory.createEmptyBorder());
-        minusButton.setContentAreaFilled(false);
+        VisualHelpers.buttonFormat(minusButton, COLORS[2], COLORS[1]);
 
         minusButton.addActionListener(l -> {
 
@@ -107,29 +71,9 @@ public class FontSizeManager {
             fontSizeField.setText(Integer.toString(Math.max(1, currentSize - 1)));
             
         });
-        
-
-        minusButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                minusButton.setForeground(COLORS[1]);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-                minusButton.setForeground(COLORS[2]);
-
-            }
-            
-        });
 
         return minusButton;
 
     }
-
 
 }

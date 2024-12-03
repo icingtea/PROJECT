@@ -2,6 +2,7 @@ package components;
 
 import javax.swing.*;
 import java.awt.*;
+
 import utils.Constants;
 
 public class MenuBar {
@@ -19,7 +20,7 @@ public class MenuBar {
         
         menuBar.add(FileMenu.fileMenu);
         menuBar.add(FontMenu.fontMenu);
-        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(Box.createHorizontalStrut(15));
         menuBar.add(Misc.findLabel);
         menuBar.add(Misc.findField);
         menuBar.add(Box.createHorizontalStrut(10));

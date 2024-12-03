@@ -2,6 +2,7 @@ package components;
 
 import javax.swing.*;
 import java.awt.*;
+
 import utils.Constants;
 
 public class SketchFrame {
@@ -22,7 +23,7 @@ public class SketchFrame {
         JRootPane rootPane = sketchFrame.getRootPane();
         rootPane.setBorder(BorderFactory.createMatteBorder(2,2,2,2, COLORS[2]));
 
-        sketchFrame.setLocation(1180, 100);
+        sketchFrame.setLocation(1000, 100);
 
         return sketchFrame;
 
